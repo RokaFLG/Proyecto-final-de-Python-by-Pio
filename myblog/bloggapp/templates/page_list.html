@@ -1,0 +1,15 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Lista de Páginas</h1>
+  {% if message %}
+    <p>{{ message }}</p>
+  {% else %}
+    <ul>
+      {% for page in pages %}
+        <li><a href="{% url 'page_detail' page.id %}">{{ page.title }}</a></li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}
