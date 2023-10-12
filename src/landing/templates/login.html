@@ -1,0 +1,92 @@
+{% extends "main.html" %}
+{% load static %}
+{% block content %}
+  <main class="h-screen">
+    {% comment %} Desktop {% endcomment %}
+    <div class="h-full min-h-[800px] flex flex-col lg:flex-row-reverse items-center relative">
+      <section class="w-full lg:w-[60%] h-[40%] lg:h-full relative">
+        <div class="h-full w-full bg-center bg-no-repeat bg-cover hidden lg:block"
+             style="background-image: url({% static 'images/landing/login-desktop.jpg' %})"></div>
+        <div class="h-full w-full bg-center bg-no-repeat bg-cover block lg:hidden"
+             style="background-image: url({% static 'images/landing/login-mobile.jpg' %})"></div>
+        <div class="h-full w-full bg-[rgba(0,0,0,0.60)] absolute top-0 z-[2] lg:hidden"></div>
+        <a href="{{ request.META.HTTP_REFERER }}"
+           class="absolute lg:hidden top-3 left-3 z-[3]">
+          <i class="fa-solid fa-arrow-left fa-xl text-white"></i>
+        </a>
+      </section>
+      <section class="w-full lg:w-[40%] flex justify-center items-center px-3 pt-10 rounded-t-2xl lg:rounded-t-none absolute lg:relative top-[38%] lg:top-0 h-[62%] lg:h-full z-[5] bg-white">
+        <div class="h-full w-[90%] max-w-[600px] lg:mt-0 flex flex-col justify-center relative">
+          <a href="{% url 'landing' %}"
+             class="mb-[40px] hidden lg:flex items-center gap-3 hover:gap-4 transition-[gap]">
+            <i class="fa-solid fa-arrow-left fa-xl text-black"></i>
+            <span class="font-medium font-title text-[18px]">Go home</span>
+          </a>
+          {% comment %} Logo {% endcomment %}
+          <div class="flex items-center gap-1 mb-8 justify-center">
+            <img src="{% static 'images/foodhouse-logo.png' %}"
+                 alt="foodhouse logo"
+                 class="w-[50px] xl:w-[60px] xxl:w-[65px]"
+                 width=""
+                 height="">
+            <h1 class="text-[30px] xl:text-[36px] xxl:text-[42px] font-logo text-text font-medium pt-1">
+              Food <span>House</span>
+            </h1>
+          </div>
+          <h2 class="font-title text-text font-medium text-[22px] lg:text-[27px] xl:text-[32px] xxl:text-[36px]">
+            Welcome back!
+          </h2>
+          <p class="text-gray-400 text-[18px] mt-3 xl:text-[22px] xxl:text-[24px] hidden lg:block">
+            Sign in with your email address and password
+          </p>
+          <form class="w-full mt-[40px] lg:mt-[60px] mb-[15px]" method="post">
+            {% csrf_token %}
+            <div>
+              <label for="email"
+                     class="text-gray-400 font-medium text-[18px] xl:text-[20px] xxl:text-[22px] hidden lg:block">
+                Email Address
+              </label>
+              <input type="text"
+                     name="{{ form.email.name }}"
+                     id="{{ form.email.id_for_label }}"
+                     class="{{ form.email.field.widget.attrs.class }}"
+                     placeholder="Email"
+                     value="{{ form.email.value }}">
+              <span class="mt-1 text-rose-600 font-medium w-full block h-[20px] lg:text-[18px]">{{ form.email.errors }}</span>
+            </div>
+            <div class="mt-4 flex flex-col">
+              <label for="password"
+                     class="mb-2 text-gray-400 font-medium text-[18px] xl:text-[20px] xxl:text-[22px] hidden lg:block">
+                Password
+              </label>
+              <div class="flex items-center">
+                <input type="password"
+                       name="{{ form.password.name }}"
+                       id="{{ form.password.id_for_label }}"
+                       class="{{ form.password.field.widget.attrs.class }}"
+                       placeholder="Password">
+                <span id="toggle-password"
+                      class="bg-secondary text-accent w-[50px] h-[44px] xl:h-[52px] rounded-r-md grid place-content-center cursor-pointer">
+                  <i class="fa-regular fa-eye fa-lg"></i>
+                </span>
+              </div>
+              <span class="mt-1 text-rose-600 font-medium min-h-[20px] lg:text-[18px]">{{ form.password.errors }}</span>
+            </div>
+            <a href="#"
+               class="text-right font-text text-accent hover:text-primary transition-colors mt-3 block xl:text-[18px]">Forgot your password?</a>
+            <button type="submit"
+                    class="mt-7 lg:mt-10 rounded-md bg-secondary hover:bg-white hover:text-secondary transition-colors border-2 border-transparent hover:border-secondary text-white font-medium font-title text-xl xl:text-2xl w-full lg:w-[230px] p-2">
+              Login
+            </button>
+          </form>
+          <p class="mt-7 lg:mt-10 pb-5 lg:pb-2 font-text text-gray-500 text-center lg:text-left xl:text-[18px]">
+            Don't have an account? <a href="{% url 'register' %}"
+    class="text-accent hover:text-primary transition-colors font-medium font-title">Sign up</a>
+          </p>
+        </div>
+      </section>
+    </div>
+    {% comment %} Mobile {% endcomment %}
+  </main>
+  <script src="{% static 'scripts/landing/toggle-password.js' %}"></script>
+{% endblock content %}

@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Blog, Recetas de cocina" />
+    <meta name="description"
+          content="¡Bienvenido a nuestro apasionante blog de recetas de cocina comunitario! Descubre una infinita variedad de platos creados por entusiastas chefs caseros. Desde las recetas clásicas hasta innovadoras combinaciones, nuestra comunidad te invita a compartir y explorar sabores únicos. Atrévete a cocinar, compartir tus creaciones culinarias y ser parte de esta emocionante experiencia gastronómica. ¡La inspiración culinaria te espera en cada rincón de nuestro blog!" />
+    <title>Pios Food</title>
+    <link rel="icon" href="{% static 'images/foodhouse-icon.ico' %}">
+    <link rel="stylesheet" href="{% static 'styles/output.css' %}">
+    <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+  </head>
+  <body>
+    {% block content %}
+    {% endblock content %}
+  </body>
+</html>

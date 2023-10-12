@@ -1,0 +1,92 @@
+{% extends "main.html" %}
+{% load static %}
+{% block content %}
+  <main class="min-h-screen w-screen relative h-auto">
+    {% comment %} Banner mobile {% endcomment %}
+    <div class="w-full h-full min-h-[600px] lg:hidden bg-center bg-cover bg-no-repeat absolute bottom-0"
+         style="background-image: url({% static 'images/landing/register-mobile.jpg' %})"></div>
+    {% comment %} Banner desktop {% endcomment %}
+    <div class="w-full h-full hidden lg:block bg-center bg-cover bg-no-repeat absolute bottom-0"
+         style="background-image: url({% static 'images/landing/register-desktop.jpg' %})"></div>
+    {% comment %} Dark Layer {% endcomment %}
+    <div class="w-full h-full absolute lg:hidden top-0 z-[2] bg-[rgba(0,0,0,0.75)]"></div>
+    <section class="z-[3] px-3 py-5 relative h-auto min-h-screen grid place-content-center">
+      <div class="h-full flex flex-col justify-center mx-auto max-w-[550px]">
+        <div class="lg:bg-white lg:p-5 lg:rounded-lg lg:drop-shadow-xl">
+          <div class="flex items-center gap-1 mb-8 justify-center">
+            <img src="{% static 'images/foodhouse-logo.png' %}"
+                 alt="foodhouse logo"
+                 class="w-[50px] xl:w-[60px] xxl:w-[65px]"
+                 width=""
+                 height="">
+            <h1 class="text-[32px] lg:text-[36px] xl:text-[40px] xxl:text-[44px] font-logo text-white lg:text-text font-semibold pt-1">
+              Food <span>House</span>
+            </h1>
+          </div>
+          <h3 class="mt-1 font-medium text-[18px] lg:text-[20px] xl:text-[22px] xxl:text-[24px] font-text text-white lg:text-text text-center">
+            Taste a world of recipes. Register today!
+          </h3>
+          <form method="post"
+                class="mt-10 flex flex-col gap-4 lg:gap-5 xl:gap-6 xxl:gap-7"
+                id="register-form">
+            {% csrf_token %}
+            <div class="flex flex-col gap-2">
+              <div class="flex items-center border-b-2 rounded-md border-b-accent w-full">
+                <span class="h-[44px] w-[50px] grid place-content-center  text-secondary"><i class="fa-solid fa-envelope fa-xl"></i></span>
+                <input type="text"
+                       name="{{ form.email.name }}"
+                       id="{{ form.email.id_for_label }}"
+                       class="{{ form.email.field.widget.attrs.class }}"
+                       placeholder="Email"
+                       value="{{ form.email.value }}">
+              </div>
+              <span class="text-rose-600 font-medium min-h-[16px]">{{ form.email.errors }}</span>
+            </div>
+            <div class="flex flex-col gap-2">
+              <div class="flex items-center border-b-2 rounded-md border-b-accent w-full">
+                <span class="h-[44px] w-[50px] grid place-content-center  text-secondary"><i class="fa-solid fa-user fa-xl"></i></span>
+                <input type="text"
+                       name="{{ form.username.name }}"
+                       id="{{ form.username.id_for_label }}"
+                       class="{{ form.username.field.widget.attrs.class }}"
+                       placeholder="Username"
+                       value="{{ form.username.value }}">
+              </div>
+              <span class="text-rose-600 font-medium min-h-[16px]">{{ form.username.errors }}</span>
+            </div>
+            <div class="flex flex-col gap-2">
+              <div class="flex items-center border-b-2 rounded-md border-b-accent w-full">
+                <span class="h-[44px] w-[50px] grid place-content-center  text-secondary"><i class="fa-solid fa-key fa-xl"></i></span>
+                <input type="password"
+                       name="{{ form.password1.name }}"
+                       id="{{ form.password1.id_for_label }}"
+                       class="{{ form.password1.field.widget.attrs.class }}"
+                       placeholder="Password">
+              </div>
+              <span class="text-rose-600 font-medium min-h-[16px]">{{ form.password1.errors }}</span>
+            </div>
+            <div class="flex flex-col gap-2">
+              <div class="flex items-center border-b-2 rounded-md border-b-accent w-full">
+                <span class="h-[44px] w-[50px] grid place-content-center  text-secondary"><i class="fa-solid fa-key fa-xl"></i></span>
+                <input type="password"
+                       name="{{ form.password2.name }}"
+                       id="{{ form.password2.id_for_label }}"
+                       class="{{ form.password2.field.widget.attrs.class }}"
+                       placeholder="Confirm Password">
+              </div>
+              <span class="text-rose-600 font-medium min-h-[16px]">{{ form.password2.errors }}</span>
+            </div>
+            <button type="submit"
+                    class="mt-10 w-full bg-secondary hover:bg-white text-white hover:text-secondary border-transparent border-2 hover:border-secondary transition-colors font-title font-semibold py-3 rounded-md text-[18px] lg:text-[20px] xl:text-[24px]">
+              Register
+            </button>
+          </form>
+          <p class="mt-5 xl:mt-7 text-white lg:text-text text-center text-[18px] lg:text-[20px] xl:text-[22px] font-medium">
+            Already have an account? <a href="{% url 'login' %}"
+    class="text-primary hover:text-accent transition-colors">Sign in</a>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+{% endblock content %}

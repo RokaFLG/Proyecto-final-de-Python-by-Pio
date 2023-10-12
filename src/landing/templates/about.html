@@ -1,0 +1,55 @@
+{% extends "main.html" %}
+{% load static %}
+{% block content %}
+  <main class="grid grid-cols-12 xl:row-span-12 xl:min-h-[900px] h-screen">
+    <section class="bg-primary col-span-12 h-[150px] md:h-[300px] xl:h-full md:col-span-6 xl:row-span-6 px-2 flex flex-col items-center justify-center relative">
+      <h1 class="font-logo text-[30px] lg:text-[34px] xl:text-[38px] font-medium text-white text-center">
+        Welcome to FoodHouse
+      </h1>
+      <a href="{% url 'landing' %}"
+         class="flex items-center gap-2 font-title font-medium text-[18px] md:text-[20px] absolute top-2 left-2 text-[#F2E7D3]">
+        <i class="fa-solid fa-chevron-left fa-xl"></i>
+        <p class="hidden sm:flex">Go Back</p>
+      </a>
+    </section>
+    <section class="bg-background col-span-12 md:col-span-6 bg-cover bg-center bg-no-repeat h-[300px] xl:h-full xl:row-span-6"
+             style="background-image: url({% static 'images/landing/food-plate-5.jpg' %})">
+    </section>
+    <section class="bg-secondary col-span-12 h-[200px] md:h-full md:col-span-4 lg:col-span-3 xl:row-span-1 flex items-center">
+      <ul class="flex md:flex-col justify-center text-white font-title font-semibold w-full text-[30px] lg:text-[32px] xl:text-[34px]">
+        <li class="text-center transform md:-rotate-90 after:content-['A'] md:after:content-['S']"></li>
+        <li class="text-center transform md:-rotate-90 after:content-['B'] md:after:content-['U']"></li>
+        <li class="text-center transform md:-rotate-90 md:mt-5 after:content-['O'] md:after:content-['T']"></li>
+        <li class="text-center transform md:-rotate-90 after:content-['U'] md:after:content-['U']"></li>
+        <li class="text-center transform md:-rotate-90 mr-5 md:mr-0 after:content-['T'] md:after:content-['O']"></li>
+        <li class="text-center transform md:-rotate-90 after:content-['U'] md:after:content-['B']"></li>
+        <li class="text-center transform md:-rotate-90 after:content-['S'] md:after:content-['A']"></li>
+      </ul>
+    </section>
+    <section class="bg-background col-span-12 h-auto md:col-span-8 lg:col-span-6 xl:row-span-1 flex items-center px-3 sm:px-4 py-5 ">
+      <div class="flex flex-col gap-3 lg:gap-4 font-text tracking-wider leading-[27.5px] lg:leading-[30px] lg:text-[17px] text-justify max-w-[500px] mx-auto">
+        <p>
+          Our blog is a delectable fusion of flavors, where we whip up a delightful assortment of dishes from diverse cuisines and cultures. Whether you're a seasoned chef or a kitchen newbie, we have something for everyone.
+        </p>
+        <p>
+          What sets us apart is our unwavering commitment to using fresh, high-quality ingredients, and our keen eye for bringing creativity to traditional recipes. We believe that cooking is an art, and each dish we craft is an expression of our culinary passion.
+        </p>
+        <p>
+          Through our captivating articles, step-by-step recipes, and cooking tips, we aim to inspire and empower you to embark on your own culinary adventures. From tantalizing appetizers to indulgent desserts, our blog is your go-to source for culinary inspiration that will leave your taste buds dancing with joy.
+        </p>
+      </div>
+    </section>
+    <section class="hidden lg:block bg-accent col-span-3 h-full xl:row-span-1">
+    </section>
+    <section class="bg-background col-span-12 md:col-span-6 bg-cover bg-center bg-no-repeat h-[300px] xl:h-full xl:row-span-3"
+             style="background-image: url({ static 'images/landing/food-plate-6.jpg' })">
+    </section>
+    <section class="bg-[#F2E7D3] col-span-12 h-full md:col-span-6 xl:row-span-3 flex items-center px-2 sm:px-4 py-5">
+      <div class="flex flex-col gap-3 font-text tracking-wider leading-[27.5px] lg:leading-[30px] lg:text-[17px] text-justify max-w-[700px] mx-auto">
+        <p>
+          Join us on this gastronomic journey as we explore the world of flavors, ingredients, and techniques. Whether you're looking to master a classic recipe or discover innovative twists, FoodHouse is your kitchen companion, ready to elevate your cooking skills and make every meal an unforgettable experience.
+        </p>
+      </div>
+    </section>
+  </main>
+{% endblock content %}

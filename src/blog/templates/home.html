@@ -1,0 +1,134 @@
+{% extends "blog_layout.html" %}
+{% load static %}
+{% block content %}
+  <main class="w-full px-2 md:px-4 mb-[100px] max-w-[1440px] mx-auto relative">
+    <div class="text-center flex flex-col md:flex-row md:justify-between md:text-left border-b-2 border-b-gray-300 pb-4">
+      <div>
+        <h1 class="font-title font-semibold uppercase text-[20px] md:text-[21px] lg:text-[23px]">Welcome to our blog</h1>
+        <p class="font-text text-[17px] md:text-[18px] lg:text-[20px] mt-2 text-gray-600">
+          Here you can find a lot of recipes and share yours with other users
+        </p>
+      </div>
+      <a href="{% url 'blog:create-recipe' %}"
+         class="hidden md:flex bg-primary hover:bg-accent cursor-pointer transition drop-shadow-md text-white px-5 py-3 rounded-md items-center gap-2">
+        <i class="fa-solid fa-plus fa-xl"></i>
+        <p class="hidden lg:block text-[18px] uppercase font-medium">New Recipe</p>
+      </a>
+    </div>
+    <section class="w-full grid grid-cols-12 gap-4 mt-[20px]">
+      {% comment %} Filters {% endcomment %}
+      <section class="col-span-12 lg:col-span-4 xl:col-span-3 sm:max-w-[700px] md:max-w-[800px] lg:max-w-none mx-auto w-full">
+        <div class="flex items-center justify-between gap-2">
+          <h3 class="font-title text-[21px] font-medium">Filter recipes</h3>
+          <button id="toggle-filters" class="lg:cursor-default">
+            <i class="fa-solid fa-sliders fa-2xl text-accent"></i>
+          </button>
+        </div>
+        <section class="hidden lg:block mt-4">
+          {% include "blog/filters.html" %}
+        </section>
+      </section>
+      {% comment %} Recipes {% endcomment %}
+      <section class="w-full col-span-12 lg:col-span-8 xl:col-span-9 grid grid-cols-12 gap-y-8 gap-x-3 max-w-[400px] sm:max-w-[700px] md:max-w-[800px] lg:max-w-none mx-auto">
+        {% if recipes %}
+          {% for recipe in recipes %}
+            <article class="recipe-card col-span-12 sm:col-span-6 lg:col-span-6 xl:col-span-4"
+                     data-categories="{{ recipe.categories.all|join:", " }}"
+                     data-duration="{{ recipe.duration }}">
+              <div>
+                <div class="h-[280px] lg:h-[320px] relative">
+                  <img src="{{ recipe.banner.url }}"
+                       alt="{{ recipe.title }} image"
+                       width=""
+                       height=""
+                       class="w-full h-full absolute top-0">
+                  <button id="toggle-favorites"
+                          data-recipe="{{ recipe.id }}"
+                          class="absolute top-2 right-2 rounded-full p-2 bg-[rgba(0,0,0,0.70)] grid place-content-center text-rose-500 hover:bg-rose-300 transition-colors">
+                    <i class="fa-regular fa-heart fa-xl"></i>
+                  </button>
+                </div>
+                <a href="{% url 'blog:recipe' recipe.id %}">
+                  <div class="mt-4 flex items-center justify-between w-full max-w-[250px]">
+                    <div class="flex items-center gap-2 text-gray-400">
+                      <i class="fa-regular fa-clock fa-lg"></i>
+                      <p class="lg:text-[18px]">{{ recipe.duration }} minutes</p>
+                    </div>
+                    <div class="flex items-center gap-2 text-gray-400">
+                      <i class="fa-regular fa-thumbs-up fa-lg"></i>
+                      <p class="lg:text-[18px]">{{ recipe.likes_count }} likes</p>
+                    </div>
+                  </div>
+                  <h4 class="mt-2 text-[20px] font-title font-semibold lg:text-[21px] xl:text-[22px]">{{ recipe.title }}</h4>
+                </a>
+              </div>
+            </article>
+          {% endfor %}
+          <section class="col-span-12 mt-10 lg:mt-0 flex flex-col items-center justify-center">
+            {% if is_favorite %}
+              <div id="no-recipes" class="hidden flex-col items-center">
+                <img src="{% static 'images/no-favorites.png' %}"
+                     alt="illustration"
+                     width=""
+                     height=""
+                     class="w-[200px] md:w-[240px] lg:w-[280px] mx-auto">
+                <h3 class="text-center font-title text-[24px] md:text-[30px] lg:text-[34px] mt-5 md:mt-7 font.medium">
+                  You don't have any favorite recipe
+                </h3>
+              </div>
+            {% else %}
+              <div id="no-recipes" class="hidden flex-col items-center">
+                <img src="{% static 'images/no-recipes.png' %}"
+                     alt="illustration"
+                     width=""
+                     height=""
+                     class="w-[200px] md:w-[240px] lg:w-[280px] mx-auto">
+                <h3 class="text-center font-title text-[24px] md:text-[30px] lg:text-[34px] mt-5 md:mt-7 font.medium">
+                  No recipes found
+                </h3>
+              </div>
+            {% endif %}
+          </section>
+        {% else %}
+          <section class="col-span-12 mt-10 lg:mt-0 flex flex-col items-center justify-center">
+            {% if is_favorite %}
+              <div id="no-recipes" class="flex-col items-center">
+                <img src="{% static 'images/no-favorites.png' %}"
+                     alt="illustration"
+                     width=""
+                     height=""
+                     class="w-[200px] md:w-[240px] lg:w-[280px] mx-auto">
+                <h3 class="text-center font-title text-[24px] md:text-[30px] lg:text-[34px] mt-5 md:mt-7 font.medium">
+                  You don't have any favorite recipe
+                </h3>
+              </div>
+            {% else %}
+              <div id="no-recipes" class="flex-col items-center">
+                <img src="{% static 'images/no-recipes.png' %}"
+                     alt="illustration"
+                     width=""
+                     height=""
+                     class="w-[200px] md:w-[240px] lg:w-[280px] mx-auto">
+                <h3 class="text-center font-title text-[24px] md:text-[30px] lg:text-[34px] mt-5 md:mt-7 font.medium">
+                  No recipes found
+                </h3>
+              </div>
+            {% endif %}
+          </section>
+        {% endif %}
+      </section>
+    </section>
+  </main>
+  {% comment %} Filters mobile {% endcomment %}
+  <section id="mobile-filters"
+           class="pb-5 overflow-y-scroll h-screen lg:hidden absolute top-0 left-0 z-20 w-[80%] xs:w-[70%] max-w-[270px] bg-gray-50 border-r-2 border-r-accent drop-shadow-lg -translate-x-full transition-transform duration-200 ease-in-out">
+    <div class="w-[90%] h-auto flex flex-col gap-6 pt-7 justify-around mx-auto relative">
+      <div class="bg-white p-2 text-accent border-2 border-accent text-center uppercase font-medium mb-[30px]">Filters</div>
+      <div>{% include "blog/filters.html" %}</div>
+    </div>
+  </section>
+  <script src="{% static 'scripts/blog/toggle-filters.js' %}"></script>
+  <script src="{% static 'scripts/blog/filters.js' %}"></script>
+  <script src="{% static 'scripts/blog/toggle-favorites.js' %}" type="module"></script>
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+{% endblock content %}

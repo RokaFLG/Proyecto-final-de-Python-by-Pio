@@ -1,0 +1,122 @@
+{% extends "blog_layout.html" %}
+{% load static %}
+{% block content %}
+  <main class="w-full bg-primary px-2 md:px-4 max-w-[1440px] mx-auto h-[calc(100vh-180px)] lg:h-[calc(100vh-150px)] overflow-hidden">
+    <section class="w-full grid grid-cols-12 gap-4 h-full">
+      {% comment %} Users {% endcomment %}
+      <section class="col-span-12 md:col-span-6 pb-[50px] overflow-hidden">
+        <div class="text-white flex items-center gap-2 py-2">
+          <i class="fa-regular fa-comments fa-xl"></i>
+          <h1 class="font-title text-[24px] font-medium">Chat</h1>
+        </div>
+        <hr>
+        <form class="mt-[30px]">
+          <div class="bg-[#F2E7D3] flex items-center gap-1">
+            <span class=" w-[40px] text-text flex justify-center"><i class="fa-solid fa-magnifying-glass"></i></span>
+            <input type="text"
+                   name="username"
+                   id="search-username"
+                   placeholder="Search by username..."
+                   class="bg-transparent border-none focus:outline-none font-text font-light  py-3">
+          </div>
+        </form>
+        {% comment %} Chat List {% endcomment %}
+        <ul class="mt-[20px] flex flex-col gap-5 h-[75%] overflow-y-scroll scrollbar-thin scrollbar-thumb-white">
+          {% if not conversations %}
+            <li class="mt-4 text-center w-full flex flex-col items-center justify-center">
+              <i class="fa-solid fa-comment-slash fa-2xl"></i>
+              <h3 class="mt-4 font-title font-semibold text-[23px] md:text-[26px] lg:text-[30px]">
+                You don't have any conversation
+              </h3>
+              <p class="mt-3 font-text text-white text-[18px] md:text-[20px] lg:text-[22px]">Visit a user's profile and start one</p>
+            </li>
+          {% else %}
+            {% for conversation in conversations %}
+              <li>
+                <a href="{% url 'blog:chat' %}?conversation={{ conversation.id }}"
+                   class="flex items-center gap-2 relative p-2">
+                  <div class="bg-blue-400 rounded-full w-[50px] lg:w-[60px] h-[50px] lg:h-[60px]">
+                    {% if conversation.participant1 == request.user %}
+                      <img src="{{ conversation.participant2.avatar.url }}"
+                           alt="chat"
+                           width=""
+                           height=""
+                           class="w-full h-full rounded-full bg-contain">
+                    {% else %}
+                      <img src="{{ conversation.participant1.avatar.url }}"
+                           alt="chat"
+                           width=""
+                           height=""
+                           class="w-full h-full rounded-full bg-contain">
+                    {% endif %}
+                  </div>
+                  <div class="flex flex-col gap-1 max-w-[170px] xs:max-w-[240px] sm:max-w-[400px] md:max-w-[250px] lg:max-w-[370px] xl:max-w-[480px] xxl:max-w-[510px]">
+                    <p class="font-title font-bold text-[17px] lg:text-[19px] text-white text-ellipsis overflow-hidden whitespace-nowrap">
+                      {% if conversation.participant1 != request.user %}
+                        {{ conversation.participant1.name }}
+                      {% else %}
+                        {{ conversation.participant2.name }}
+                      {% endif %}
+                    </p>
+                    <p class="font-text font-light text-[15px] lg:text-[17px] text-[#F2E7D3] text-ellipsis overflow-hidden whitespace-nowrap">
+                      {{ conversation.messages.last.message|truncatechars:30 }}
+                    </p>
+                  </div>
+                </a>
+              </li>
+            {% endfor %}
+          {% endif %}
+        </ul>
+      </section>
+      {% comment %} Conversation {% endcomment %}
+      <section id="current-conversation"
+               class="absolute md:static z-[10] md:z-0 right-0 top-0 hidden w-full col-span-12 md:col-span-6 h-screen md:h-full bg-background overflow-hidden">
+        <div class="w-full h-full relative pb-[150px]">
+          <div class="bg-slate-200 w-full p-2 flex items-center gap-3 drop-shadow-md">
+            <div class="bg-blue-500 rounded-full h-[60px] w-[60px]">
+              {% if active_conversation.participant1 == request.user %}
+                <img src="{{ active_conversation.participant2.avatar.url }}"
+                     alt="chat"
+                     width=""
+                     height=""
+                     class="w-full h-full rounded-full bg-contain">
+              {% else %}
+                <img src="{{ active_conversation.participant1.avatar.url }}"
+                     alt="chat"
+                     width=""
+                     height=""
+                     class="w-full h-full rounded-full bg-contain">
+              {% endif %}
+            </div>
+            <h3 class="font-title font-medium text-[20px] text-text truncate">
+              {% if active_conversation.participant1 != request.user %}
+                {{ active_conversation.participant1.name }}
+              {% else %}
+                {{ active_conversation.participant2.name }}
+              {% endif %}
+            </h3>
+          </div>
+          <ul data-user={{ request.user.id }} id="messages-container" class="p-2 mt-5 pb-[110px] md:pb-[50px] flex flex-col gap-7 h-full overflow-y-scroll scrollbar-thin scrollbar-thumb-black">
+          </ul>
+          <div class="absolute bottom-[74px] md:bottom-0 h-[60px] w-full">
+            <section class="w-full h-full">
+              <div class="w-full h-full flex items-center justify-between drop-shadow-md">
+                <input type="text"
+                       name="message"
+                       id="message"
+                       class="p-2 font-title font-light h-full w-full focus:outline-none"
+                       placeholder="Type something...">
+                <button type="button"
+                        id="send-message"
+                        class="w-[70px] h-[60px] bg-accent grid place-content-center">
+                  <i class="fa-solid fa-circle-chevron-right fa-xl text-white"></i>
+                </button>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+  <script src="{% static 'scripts/blog/show-conversation.js' %}" type="module"></script>
+{% endblock content %}

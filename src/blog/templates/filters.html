@@ -1,0 +1,79 @@
+<p class="text-gray-400 border-b-2 border-b-gray-300 pb-4 font-text font-light lg:font-normal text-center lg:text-left text-[18px] leading-[30px]">
+    Check multiple boxes below to narrow recipe search results:
+  </p>
+  <div class="mt-7 flex flex-col gap-10">
+    <form method="get"
+          id="filters-form"
+          class="mt-3 flex flex-col gap-2 xs:text-[18px] text-gray-400 font-text font-light">
+      <section class="flex flex-col gap-3">
+        <h4 class="font-title text-[20px] font-medium text-text">By Meal:</h4>
+        <div>
+          <input type="checkbox"
+                 name="breakfast"
+                 id="breakfast"
+                 data-category="breakfast"
+                 class="filter-cbx bg-transparent hover:bg-gray-100 cursor-pointer w-5 h-5 border-2 border-primary focus:outline-none checked:bg-orange-400 checked:hover:bg-orange-400 checked:focus:bg-orange-400 focus:ring-0">
+          <label for="breakfast">Breakfast ({{ recipes_count.Breakfast }})</label>
+        </div>
+        <div>
+          <input type="checkbox"
+                 name="lunch"
+                 id="lunch"
+                 data-category="lunch"
+                 class="filter-cbx bg-transparent hover:bg-gray-100 cursor-pointer w-5 h-5 border-2 border-primary focus:outline-none checked:bg-orange-400 checked:hover:bg-orange-400 checked:focus:bg-orange-400 focus:ring-0">
+          <label for="lunch">Lunch ({{ recipes_count.Lunch }})</label>
+        </div>
+        <div>
+          <input type="checkbox"
+                 name="snack"
+                 id="snack"
+                 data-category="snack"
+                 class="filter-cbx bg-transparent hover:bg-gray-100 cursor-pointer w-5 h-5 border-2 border-primary focus:outline-none checked:bg-orange-400 checked:hover:bg-orange-400 checked:focus:bg-orange-400 focus:ring-0">
+          <label for="snack">Snack ({{ recipes_count.Snack }})</label>
+        </div>
+        <div>
+          <input type="checkbox"
+                 name="dinner"
+                 id="dinner"
+                 data-category="dinner"
+                 class="filter-cbx bg-transparent hover:bg-gray-100 cursor-pointer w-5 h-5 border-2 border-primary focus:outline-none checked:bg-orange-400 checked:hover:bg-orange-400 checked:focus:bg-orange-400 focus:ring-0">
+          <label for="dinner">Dinner ({{ recipes_count.Dinner }})</label>
+        </div>
+      </section>
+      <section class="mt-5 flex flex-col gap-3">
+        <h4 class="font-title text-[20px] font-medium text-text">By Duration:</h4>
+        <div>
+          <input type="checkbox"
+                 name="L15"
+                 id="L15"
+                 data-duration="15"
+                 class="filter-cbx bg-transparent hover:bg-gray-100 cursor-pointer w-5 h-5 border-2 border-primary focus:outline-none checked:bg-orange-400 checked:hover:bg-orange-400 checked:focus:bg-orange-400 focus:ring-0">
+          <label for="L15">Less than 15min ({{ duration_count.15 }})</label>
+        </div>
+        <div>
+          <input type="checkbox"
+                 name="L30"
+                 id="L30"
+                 data-duration="30"
+                 class="filter-cbx bg-transparent hover:bg-gray-100 cursor-pointer w-5 h-5 border-2 border-primary focus:outline-none checked:bg-orange-400 checked:hover:bg-orange-400 checked:focus:bg-orange-400 focus:ring-0">
+          <label for="L30">Less than 30min ({{ duration_count.30 }})</label>
+        </div>
+        <div>
+          <input type="checkbox"
+                 name="L45"
+                 id="L45"
+                 data-duration="45"
+                 class="filter-cbx bg-transparent hover:bg-gray-100 cursor-pointer w-5 h-5 border-2 border-primary focus:outline-none checked:bg-orange-400 checked:hover:bg-orange-400 checked:focus:bg-orange-400 focus:ring-0">
+          <label for="L45">Less than 45min ({{ duration_count.45 }})</label>
+        </div>
+        <div>
+          <input type="checkbox"
+                 name="L60"
+                 id="L60"
+                 data-duration="60"
+                 class="filter-cbx bg-transparent hover:bg-gray-100 cursor-pointer w-5 h-5 border-2 border-primary focus:outline-none checked:bg-orange-400 checked:hover:bg-orange-400 checked:focus:bg-orange-400 focus:ring-0">
+          <label for="L60">Less than 60min ({{ duration_count.60 }})</label>
+        </div>
+      </section>
+    </form>
+  </div>

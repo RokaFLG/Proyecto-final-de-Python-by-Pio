@@ -1,0 +1,210 @@
+{% extends "main.html" %}
+{% load static %}
+{% block content %}
+  <main class="h-screen overflow-x-hidden relative">
+    <nav class="w-full bg-[#F2E7D3] lg:bg-transparent h-[70px] md:h-[85px] lg:h-auto flex justify-center lg:absolute top-0 z-[11]">
+      <section class="w-full px-2 lg:px-0 flex justify-between items-center lg:items-start relative">
+        <div class="flex md:hidden items-center gap-1 justify-center">
+          <img src="{% static 'images/foodhouse-logo.png' %}"
+               alt="foodhouse logo"
+               class="w-[50px] xl:w-[60px] xxl:w-[65px]"
+               width=""
+               height="">
+          <h1 class="text-[22px] xs:text-[30px] xl:text-[36px] xxl:text-[42px] font-logo text-text font-medium pt-1">
+            Food <span>House</span>
+          </h1>
+        </div>
+        <button class="md:hidden absolute right-3 top-6 z-[21]" id="menu-toggle">
+          <span id="closed-menu-icon"><i class="fa-solid fa-bars fa-xl text-text"></i></span>
+          <span id="open-menu-icon" class="hidden"><i class="fa-solid fa-bars-staggered fa-xl text-text"></i></span>
+        </button>
+        <img src="{% static 'images/landing/food-plate-3.jpg' %}"
+             alt="Food plate"
+             width=""
+             height=""
+             class="w-[40%] hidden lg:block relative top-0">
+        <div class="h-full lg:h-[85px] lg:w-[60%] max-w-[750px] lg:max-w-none bg-[#F2E7D3] hidden md:flex">
+          <ul class="h-full w-full px-10 flex gap-10 items-center justify-between uppercase font-title lg:text-[18px] xl:text-[20px]">
+            <li class="text-secondary">
+              <a href="#">Home</a>
+            </li>
+            <li class="text-secondary">
+              <a href="{% url 'about' %}">About</a>
+            </li>
+            <li class="text-secondary">
+              <a href="{% url 'blog:home' %}">Blog</a>
+            </li>
+            <li class="text-secondary">
+              <a href="#">Contact</a>
+            </li>
+          </ul>
+        </div>
+        <div class="hidden lg:flex items-center gap-1 ml-2 justify-center lg:w-[25%]">
+          <h1 class="text-[22px] xl:text-[30px] xxl:text-[34px] font-logo text-background font-medium pt-6 xl:pt-5 xxl:pt-4">
+            Food <span>House</span>
+          </h1>
+        </div>
+        <div class="items-center gap-1 justify-center hidden md:flex lg:hidden">
+          <img src="{% static 'images/foodhouse-logo.png' %}"
+               alt="foodhouse logo"
+               class="w-[50px] xl:w-[60px] xxl:w-[65px]"
+               width=""
+               height="">
+          <h1 class="text-[30px] xl:text-[36px] xxl:text-[42px] font-logo text-text font-medium pt-1">
+            Food <span>House</span>
+          </h1>
+        </div>
+      </section>
+      {% comment %} Mobile Menu {% endcomment %}
+      <div id="mobile-menu"
+           class="absolute top-0 right-0 w-[70%] max-w-[240px] translate-x-full h-full bg-background z-20 border-l-2 border-l-text transition-transform duration-200 md:hidden">
+        <div class="h-[60%] flex flex-col justify-center px-2 w-full relative">
+          <div class="flex md:hidden items-center gap-1 justify-center">
+            <img src="{% static 'images/foodhouse-logo.png' %}"
+                 alt="foodhouse logo"
+                 class="w-[40px] xs:w-[50px] xl:w-[60px] xxl:w-[65px]"
+                 width=""
+                 height="">
+            <h1 class="text-[20px] xs:text-[25px] font-logo text-text font-medium pt-1">
+              Food <span>House</span>
+            </h1>
+          </div>
+          <ul class="mt-[75px] w-full grid place-content-center">
+            <li class="flex items-center gap-4 uppercase font-text text-[22px]">
+              <i class="fa-solid fa-house text-secondary"></i>
+              <a href="#">Home</a>
+            </li>
+            <li class="mt-7 flex items-center gap-4 uppercase font-text text-[22px]">
+              <i class="fa-solid fa-circle-info text-secondary"></i>
+              <a href="{% url 'about' %}">About</a>
+            </li>
+            <li class="mt-7 flex items-center gap-4 uppercase font-text text-[22px]">
+              <i class="fa-solid fa-book-bookmark text-secondary"></i>
+              <a href="{% url 'blog:home' %}">Blog</a>
+            </li>
+            <li class="mt-7 flex items-center gap-4 uppercase font-text text-[22px]">
+              <i class="fa-regular fa-circle-question text-secondary"></i>
+              <a href="#">Contact</a>
+            </li>
+          </ul>
+        </div>
+        <p class="text-text font-logo absolute bottom-10 text-center">
+          Desarrollado por
+          <a href="https://www.linkedin.com/in/ciro-schapert-557813238/"
+             target="_blank"
+             class="text-primary">Ciro Schapert</a>
+        </p>
+      </div>
+    </nav>
+    <div class="w-full h-[calc(100%-70px)] md:h-[calc(100%-85px)] lg:h-full flex flex-col lg:flex-row-reverse lg:min-h-[850px] xl:min-h-[800px]">
+      <section class="bg-accent h-[40%] lg:h-full min-h-[315px] w-full lg:w-[40%] relative z-[10] px-2 xs:px-3 md:px-5">
+        <div class="relative w-full h-[200px] lg:hidden">
+          <img src="{% static 'images/landing/food-plate-2.png' %}"
+               alt="food plate"
+               width=""
+               height=""
+               class="w-[200px] md:w-[220px] absolute -right-3 top-2 lg:hidden">
+          <a href="{% url 'blog:home' %}"
+             class="text-secondary bg-white rounded-md p-3 w-[150px] xs:w-[160px] flex items-center justify-between uppercase font-medium absolute top-7 lg:hidden">
+            <p>Explore now</p>
+            <i class="fa-solid fa-angle-right fa-xl"></i>
+          </a>
+        </div>
+        <div class="mt-7 lg:hidden">
+          <p class="uppercase font-medium font-text text-[#F2E7D3] md:text-[18px]">Welcome to our</p>
+          <h1 class="mt-2 font-title font-semibold text-[40px] xs:text-[45px] md:text-[50px] text-white leading-[60px] max-w-[400px] sm:max-w-none">
+            Tasty Recipe Collection!
+          </h1>
+          <p class="font-text text-[#F2E7D3] text-[18px] xs:text-[19px] sm:text-[21px] md:text-[23px] max-w-[500px] md:max-w-[600px] mt-3 sm:leading-[34px] leading-[30px] md:leading-[40px]">
+            Embark on a delicious culinary adventure with our mouthwatering recipes, where flavor and creativity collide. Happy cooking
+          </p>
+        </div>
+        <div class="hidden lg:flex flex-col h-[70%] justify-center pb-5">
+          <p class="uppercase font-medium font-text text-[#F2E7D3] text-[18px] xl:text-[19px] xxl:text-[20px]">Welcome to our</p>
+          <h1 class="mt-2 font-title font-semibold text-[44px] xl:text-[48px] xxl:text-[52px] text-white leading-[60px]">
+            Tasty Recipe Collection!
+          </h1>
+          <p class="font-text text-[#F2E7D3] text-[20px] xl:text-[21px] xxl:text-[23px] max-w-[600px] xl:max-w-[500px] xxl:max-w-[600px] mt-3 leading-[38px] xl:leading-[45px]">
+            Embark on a delicious culinary adventure with our mouthwatering recipes, where flavor and creativity collide. Happy cooking
+          </p>
+        </div>
+        <div class="absolute w-full z-[15] hidden lg:block bottom-0 right-0">
+          <img src="{% static 'images/landing/food-plate-4.jpg' %}"
+               alt="Food plate"
+               width=""
+               height=""
+               class="w-full ">
+        </div>
+      </section>
+      <section class="bg-primary h-[60%] min-h-[450px] sm:min-h-[420px] lg:h-full w-full lg:w-[60%] relative md:px-5 lg:px-0">
+        <div class="relative w-full h-full">
+          <img src="{% static 'images/landing/food-plate-1.png' %}"
+               alt="food plate"
+               width=""
+               height=""
+               class="w-[220px] sm:w-[240px] md:w-[270px] absolute bottom-2 -left-2 lg:hidden">
+          <ul class="flex flex-col gap-3 absolute right-3 bottom-5 lg:hidden">
+            <li class="bg-white grid place-content-center p-2 rounded-full w-[35px] md:w-[42px] h-[35px] md:h-[42px]">
+              <a href="#" class="text-secondary"><i class="fa-brands fa-instagram fa-xl"></i></a>
+            </li>
+            <li class="bg-white grid place-content-center p-2 rounded-full w-[35px] md:w-[42px] h-[35px] md:h-[42px]">
+              <a href="#" class="text-secondary"><i class="fa-brands fa-facebook fa-xl"></i></a>
+            </li>
+            <li class="bg-white grid place-content-center p-2 rounded-full w-[35px] md:w-[42px] h-[35px] md:h-[42px]">
+              <a href="#" class="text-secondary"><i class="fa-brands fa-youtube fa-xl"></i></a>
+            </li>
+            <li class="bg-white grid place-content-center p-2 rounded-full w-[35px] md:w-[42px] h-[35px] md:h-[42px]">
+              <a href="#" class="text-secondary"><i class="fa-brands fa-twitter fa-xl"></i></a>
+            </li>
+          </ul>
+          <section class="h-full hidden lg:flex items-end px-5">
+            <div class="w-full max-w-[1000px] mx-auto flex flex-col xl:flex-row xl:items-center justify-between gap-10 pb-[80px] xl:pb-[90px] xxl:pb-[110px]">
+              <div>
+                <div class="flex items-center gap-5 text-white font-medium">
+                  <h3 class="uppercase font-semibold font-title text-[21px] xl:text-[23px] xxl:text-[25px]">About Us</h3>
+                  <span class="w-[40px] h-[2px] bg-[#F2E7D3]"></span>
+                </div>
+                <p class="text-[#F2E7D3] font-text mt-2 mb-4 leading-[27px] xl:leading-[30px] xxl:leading-[34px] max-w-[500px] lg:text-[18px] xl:text-[19px] xxl:text-[20px]">
+                  Welcome to our mouthwatering culinary haven! At FoodHouse, we are passionate food enthusiasts dedicated to sharing our love for cooking and exploring the world of delicious recipes.
+                </p>
+                <a href="{% url 'about' %}"
+                   class=" text-accent hover:text-text transition-colors font-semibold font-title uppercase text-[18px] xl:text-[20px] xxl:text-[21px]">Learn More</a>
+              </div>
+              <div>
+                <div class="flex items-center gap-5 text-white uppercase font-medium">
+                  <h3 class="uppercase font-semibold font-title text-[21px] xl:text-[23px] xxl:text-[25px]">Blog</h3>
+                  <span class="w-[40px] h-[2px] bg-[#F2E7D3] "></span>
+                </div>
+                <p class="text-[#F2E7D3] font-text mt-2 mb-4 leading-[27px] xl:leading-[30px] xxl:leading-[34px] max-w-[500px] lg:text-[18px] xl:text-[19px] xxl:text-[20px]">
+                  Indulge in a delightful culinary adventure with our blog. Our platform is a treasure trove of mouthwatering recipes and culinary inspiration, dedicated to food enthusiasts and home cooks alike.
+                </p>
+                <a href="{% url 'blog:home' %}"
+                   class="text-accent hover:text-text transition-colors font-semibold font-title uppercase text-[18px] xl:text-[20px] xxl:text-[21px]">Explore now</a>
+              </div>
+            </div>
+          </section>
+          <section class="bg-[#F2E7D3] h-[60px] absolute bottom-0 w-full hidden lg:flex justify-center">
+            <div class="max-w-[1000px] mx-auto lg:flex items-center justify-between w-full ">
+              <p class="uppercase text-secondary font-semibold px-5 xl:px-0 text-[20px]">Follow Us</p>
+              <ul class="flex items-center gap-5 xl:gap-7">
+                <li class="grid place-content-center p-2">
+                  <a href="#" class="text-secondary"><i class="fa-brands fa-instagram text-[30px]"></i></a>
+                </li>
+                <li class="grid place-content-center p-2">
+                  <a href="#" class="text-secondary"><i class="fa-brands fa-facebook text-[30px]"></i></a>
+                </li>
+                <li class="grid place-content-center p-2">
+                  <a href="#" class="text-secondary"><i class="fa-brands fa-youtube text-[30px]"></i></a>
+                </li>
+                <li class="grid place-content-center p-2">
+                  <a href="#" class="text-secondary"><i class="fa-brands fa-twitter text-[30px]"></i></a>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script src="{% static 'scripts/landing/mobile-navbar.js' %}"></script>
+{% endblock content %}

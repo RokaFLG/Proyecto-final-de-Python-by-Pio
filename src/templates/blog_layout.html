@@ -1,0 +1,161 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Blog, Recetas de cocina" />
+    <meta name="description"
+          content="¡Bienvenido a nuestro apasionante blog de recetas de cocina comunitario! Descubre una infinita variedad de platos creados por entusiastas chefs caseros. Desde las recetas clásicas hasta innovadoras combinaciones, nuestra comunidad te invita a compartir y explorar sabores únicos. Atrévete a cocinar, compartir tus creaciones culinarias y ser parte de esta emocionante experiencia gastronómica. ¡La inspiración culinaria te espera en cada rincón de nuestro blog!" />
+    <title>Pios Food | Blog</title>
+    <link rel="icon" href="{% static 'images/foodhouse-icon.ico' %}">
+    <link rel="stylesheet" href="{% static 'styles/output.css' %}">
+    <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+  </head>
+  <body class="relative bg-background pt-[80px] md:pt-[110px] lg:pt-[120px] xl:pt-[130px] ">
+    <header class="w-full border-b-2 border-b-accent drop-shadow-lg bg-slate-50 fixed top-0 z-10">
+      <nav class="p-2 md:py-3 lg:py-4 flex items-center justify-between max-w-[1440px] mx-auto relative">
+        {% comment %} Logo {% endcomment %}
+        <a class="flex items-center gap-1 justify-center"
+           href="{% url 'blog:home' %}">
+          <img src="{% static 'images/foodhouse-logo.png' %}"
+               alt="foodhouse logo"
+               class="w-[50px] xl:w-[60px] xxl:w-[65px]"
+               width=""
+               height="">
+          <h1 class="text-[22px] xs:text-[30px] xl:text-[36px] xxl:text-[42px] font-logo text-text font-medium pt-1">
+            Food <span>House</span>
+          </h1>
+        </a>
+        {% comment %} Mobile Searchbar {% endcomment %}
+        <form method="get"
+              class="w-full flex items-center justify-end absolute right-0 px-2">
+          <input type="text"
+                 class="w-0 !p-0 h-[50px] rounded-r-md !border-primary focus:!border-accent !ring-0 !border-0 absolute left-0 transition-[width] duration-200 ml-2"
+                 name="search"
+                 id="mobile-searchbar">
+          <div class="!bg-primary rounded-md p-2 grid place-content-center w-[50px] h-[50px] md:hidden"
+               id="active-search">
+            <i class="fa-solid fa-magnifying-glass fa-lg text-white"></i>
+          </div>
+        </form>
+        <form class="hidden md:flex" method="get" action="{% url 'blog:home' %}">
+          <div class="flex rounded-md overflow-hidden">
+            <input type="text"
+                   name="search"
+                   id="search"
+                   placeholder="Search recipes..."
+                   class="!bg-white !border-2 focus:ring-0 focus:ring-transparent !border-primary focus:!border-accent p-2 rounded-l-md lg:text-[18px] lg:p-3">
+            <button class="!bg-primary grid place-content-center p-2 lg:p-3 lg:min-w-[60px]"
+                    type="submit">
+              <i class="fa-solid fa-magnifying-glass fa-lg text-white"></i>
+            </button>
+          </div>
+        </form>
+        <section class="hidden md:flex items-center gap-3 lg:gap-4 relative">
+          <div class="h-[35px] flex items-center gap-2">
+            <a href="{% url 'blog:favorites' %}" class="flex items-center gap-2">
+              <i class="fa-solid fa-heart fa-xl text-rose-500"></i>
+              <p class="hidden lg:block font-medium font-title uppercase lg:text-[18px]">Favorites</p>
+            </a>
+            <div class="h-full w-[1px] bg-gray-300"></div>
+            <a href="{% url 'blog:chat' %}" class="flex items-center gap-2">
+              <i class="fa-solid fa-message fa-xl text-emerald-500"></i>
+              <p class="hidden lg:block font-medium font-title uppercase lg:text-[18px]">Chat</p>
+            </a>
+          </div>
+          {% comment %} Profile {% endcomment %}
+          <div class="hidden md:flex items-center gap-2 cursor-pointer"
+               id="profile-container">
+            <div class="rounded-full w-[70px] h-[70px] border-primary border-2">
+              <img src="{{ request.user.avatar.url }}"
+                   alt="{{ request.user.username }} avatar"
+                   width=""
+                   height=""
+                   class="rounded-full h-full w-full bg-contain">
+            </div>
+            <p class="hidden lg:block text-[18px] font-medium font-title">{{ request.user.username }}</p>
+          </div>
+          {% comment %} Options Container {% endcomment %}
+          <div id="options-container"
+               class="absolute hidden -bottom-[125px] lg:-bottom-[128px] right-0 bg-white border-2 border-gray-500 rounded-md h-auto w-[160px] py-4 px-3">
+            <div class="w-full h-full flex flex-col gap-4 justify-center">
+              <a href="{% url 'blog:profile' %}"
+                 class="flex items-center gap-2 justify-between text-text text-[20px] font-title hover:text-primary transition-colors">
+                <span>Profile</span>
+                <i class="fa-regular fa-user fa-xl"></i>
+              </a>
+              <a href="{% url 'logout' %}"
+                 class="flex items-center gap-2 justify-between text-text text-[20px] font-title hover:text-primary transition-colors">
+                <span>Logout</span>
+                <i class="fa-solid fa-arrow-right-from-bracket fa-xl"></i>
+              </a>
+            </div>
+          </div>
+        </section>
+      </nav>
+    </header>
+    {% block content %}
+    {% endblock content %}
+    {% comment %} Mobile Navbar {% endcomment %}
+    <section class="md:hidden fixed bottom-0 z-10 bg-slate-100 border-t-2 border-primary border-t-md w-full flex items-center justify-center">
+      <ul class="w-full max-w-[500px] mx-auto flex items-center justify-between px-2 pb-1 pt-4 font-title uppercase">
+        <li class="border-b-4 border-b-transparent w-[18%] text-slate-500"
+            id="home-link">
+          <a href="{% url 'blog:home' %}" class="flex flex-col gap-1 items-center">
+            <i class="fa-solid fa-house fa-lg"></i>
+            <p>Home</p>
+          </a>
+        </li>
+        <li class="border-b-4 border-b-transparent w-[18%] text-slate-500"
+            id="chat-link">
+          <a href="{% url 'blog:chat' %}" class="flex flex-col gap-1 items-center">
+            <i class="fa-solid fa-message fa-lg"></i>
+            <p>Chat</p>
+          </a>
+        </li>
+        <li class="mb-2 w-[40px] xs:w-[50px] h-[40px] xs:h-[50px] rounded-full bg-accent text-white">
+          <a href="{% url 'blog:create-recipe' %}"
+             class="grid place-content-center h-full">
+            <i class="fa-solid fa-circle-plus fa-xl"></i>
+          </a>
+        </li>
+        <li class="border-b-4 border-b-transparent w-[18%] text-slate-500"
+            id="favorites-link">
+          <a href="{% url 'blog:favorites' %}"
+             class="flex flex-col gap-1 items-center">
+            <i class="fa-solid fa-heart fa-lg"></i>
+            <p>Favs</p>
+          </a>
+        </li>
+        <li class="profile-link border-b-4 border-b-transparent w-[18%] text-slate-500"
+            id="profile-container">
+          <div class="flex flex-col gap-1 items-center">
+            <i class="fa-solid fa-user fa-lg"></i>
+            <p class="after:content-['me'] xs:after:content-['profile']"></p>
+          </div>
+        </li>
+      </ul>
+      <div id="options-container"
+           class="absolute hidden md:hidden -top-[115px] right-0 bg-white border-2 border-gray-500 rounded-md h-auto w-[160px] py-4 px-3">
+        <div class="w-full h-full flex flex-col gap-4 justify-center">
+          <a href="{% url 'blog:profile' %}"
+             class="flex items-center gap-2 justify-between text-text text-[20px] font-title">
+            <span>Profile</span>
+            <i class="fa-regular fa-user fa-xl"></i>
+          </a>
+          <a href="{% url 'logout' %}"
+             class="flex items-center gap-2 justify-between text-text text-[20px] font-title">
+            <span>Logout</span>
+            <i class="fa-solid fa-arrow-right-from-bracket fa-xl"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+    <script src="{% static 'scripts/blog/set-background.js' %}"></script>
+    <script src="{% static 'scripts/blog/profile-popup.js' %}"></script>
+    <script src="{% static 'scripts/blog/mobileNavbar.js' %}"></script>
+    <script src="{% static 'scripts/blog/mobileSearchbar.js' %}"></script>
+  </body>
+</html>

@@ -1,0 +1,60 @@
+{% extends "main.html" %}
+{% load static %}
+{% block content %}
+  <main class="bg-background min-h-screen flex items-center">
+    <section class="px-2 py-4 w-full max-w-[600px] mx-auto">
+      {% comment %} Logo {% endcomment %}
+      <div class="flex items-center gap-1 justify-center">
+        <img src="{% static 'images/foodhouse-logo.png' %}"
+             alt="foodhouse logo"
+             class="w-[50px] xl:w-[60px] xxl:w-[65px]"
+             width=""
+             height="">
+        <h1 class="text-[22px] xs:text-[30px] md:text-[34px] lg:text-[38px] xl:text-[42px] xxl:text-[45px] font-logo text-text font-medium pt-1">
+          Food <span>House</span>
+        </h1>
+      </div>
+      <h2 class="mt-[45px] text-center font-text text-[20px] md:text-[22px] lg:text-[24px] font-medium text-text">
+        {% if is_editing %}
+          Edit your profile
+        {% else %}
+          Complete your profile
+        {% endif %}
+      </h2>
+      <div class="mt-[30px] bg-primary h-[1px] w-[90%] mx-auto"></div>
+      <form method="post"
+            class="mt-14 flex flex-col gap-8 items-center w-[85%] xs:w-[90%] md:w-full max-w-[500px] mx-auto"
+            enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="group cursor-pointer rounded-full overflow-hidden relative w-[120px] h-[120px] sm:w-[140px] sm:h-[140px] lg:w-[160px] lg:h-[160px] drop-shadow-md"
+             id="profile-picture-container">
+          <img id="profile-image"
+               class="w-full h-full rounded-full border-2 object-contain border-accent"
+               src="{{ request.user.avatar.url }}"
+               alt="profile picture"
+               width=""
+               height="" />
+          {{ form.avatar }}
+          <div class="bg-[rgba(0,0,0,0.60)] opacity-0 group-hover:opacity-100 transition-[opacity] duration-200 grid place-content-center w-full h-full rounded-full absolute top-0 z-[5]">
+            <i class="fa-solid fa-pen-to-square text-[30px] lg:text-[40px] text-white"></i>
+          </div>
+        </div>
+        <div class="w-full">
+          <label for="name"
+                 class="font-medium text-text sm:text-[18px] md:text-[20px] xl:text-[22px]">Name</label>
+          {{ form.name }}
+        </div>
+        <div class="w-full">
+          <label for="bio"
+                 class="font-medium text-text sm:text-[18px] md:text-[20px] xl:text-[22px]">Biography</label>
+          {{ form.bio }}
+        </div>
+        <button type="submit"
+                class="bg-accent hover:bg-primary transition-colors duration-200 text-white font-medium rounded-md drop-shadow-md text-[18px] md:text-[19px] lg:text-[20px] p-3 w-[150px]">
+          Save
+        </button>
+      </form>
+    </section>
+  </main>
+  <script defer src="{% static 'scripts/landing/profile-picture.js' %}"></script>
+{% endblock content %}

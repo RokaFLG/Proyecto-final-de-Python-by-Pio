@@ -1,0 +1,9 @@
+{
+    "scripts": {
+      "dev": "tailwindcss -i src/static/styles/tailwind.css -o src/static/styles/output.css --watch"
+    },
+    "devDependencies": {
+      "tailwind-scrollbar": "^3.0.4",
+      "tailwindcss": "^3.3.3"
+    }
+  }
